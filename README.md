@@ -1,19 +1,19 @@
 # Training a face Recognizer using ResNet50 + ArcFace in TensorFlow 2.0
 
-The aim of this project is to train an state of art face recognizer using TensorFlow 2.0. The architecture chosen is a modified version of ResNet50 and the loss function used is [ArcFace](https://arxiv.org/pdf/1801.07698.pdf), both originally developed by deepinsight in [mxnet](https://github.com/deepinsight/insightface). The choice of the network was made taking into account that it should have enough complexity to achive good results and that it should be relatively easy trainable from scratch. With regard to the loss function, it has been proved that ArcFace is the best loss function for face recognition to date.
+This project aims to train a state of art face recognizer using TensorFlow 2.0. The architecture chosen is a modified version of ResNet50 and the loss function used is [ArcFace](https://arxiv.org/pdf/1801.07698.pdf), both initially developed by DeepInsight in [mxnet](https://github.com/deepinsight/insightface). The choice of the network was made taking into account that it should have enough complexity to achieve good results and that it should be relatively easy trainable from scratch. Concerning the loss function, the experiments show that ArcFace is the best loss function for face recognition to date.
 
-The dataset used for training is the CASIA-Webface dataset used in [insightface](https://github.com/deepinsight/insightface), and can be downloaded from their [model zoo](https://github.com/deepinsight/insightface/wiki/Dataset-Zoo). The images are aligned using mtcnn and cropped to 112x112.
+The dataset used for training the model is the CASIA-Webface dataset used in [insightface](https://github.com/deepinsight/insightface) and is available in their [model zoo](https://github.com/deepinsight/insightface/wiki/Dataset-Zoo). The images are aligned using mtcnn and cropped to 112x112.
 
-The results of the training are evaluated with lfw, cfp_ff, cfp_fp and age_db30, using the same metrics as deepinsight.
+The results of the training are evaluated with lfw, cfp_ff, cfp_fp and age_db30, using the same metrics as DeepInsight.
 
-The full training and evaluation code is provided.
+This repository provides full training and evaluation code.
 
-A Dockerfile is also provided with all prerequisites installed.
+It also provides a Dockerfile with all prerequisites installed.
 
 
 ### Prerequisites
 
-If you are not using the provided dockerfile, you will need to install the following packages:
+If you are not using the provided Dockerfile, you will need to install the following packages:
 
 ```
 pip3 install tensorflow-gpu==2.0.0b1 pillow mxnet matplotlib==3.0.3 opencv-python==3.4.1.15 scikit-learn
@@ -37,15 +37,15 @@ python3 convert_dataset.py
 python3 train.py
 ```
 
-The training process can be followed loading the generated log file (in output/logs) with tensorboard. Its important to check that the regularization loss stops growing after a few number of steps.
+The training process can be followed by loading the generated log file (in output/logs) with tensorboard. It is important to check that the regularization loss stops growing after a few numbers of steps.
 
 <img src="imgs/regularization_loss.svg">
 
-As the net is trained from scratch, a lot of epochs will be needed to train the model and the loss will vary very slowly.
+As the net is trained from scratch, a lot of epochs will be needed to train the model, and the loss varies very slowly.
 
 <img src="imgs/train_loss.svg">
 
-Its normal that the training accuracy of the model remains 0 after several epochs because of the huge number of classes, so if you want to test the accuracy launch the lfw verification test.
+Normally, the training accuracy of the model remains 0 after several epochs because of the huge number of classes, so if you want to test the accuracy launch the lfw verification test.
 
 ### Evaluating the model
 
